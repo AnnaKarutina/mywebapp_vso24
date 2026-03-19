@@ -8,6 +8,11 @@
 <body>
 <div class="container text-center">
     <div><h2>Manage Users</h2></div>
+
+    <div class="m-2">
+        <a class="h3" th:href="@{/users/new}">Add New User</a>
+    </div>
+
     <div>
         <table class="table table-bordered">
             <thead class="table-dark">
@@ -25,7 +30,7 @@
                 <td th:text="${user.email}"></td>
                 <td th:text="${user.firstName}"></td>
                 <td th:text="${user.lastName}"></td>
-                <td></td>
+                <td th:text="${user.enabled}"></td>
             </tr>
             </tbody>
         </table>
