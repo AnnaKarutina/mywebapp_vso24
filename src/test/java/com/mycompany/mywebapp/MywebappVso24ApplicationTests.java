@@ -9,6 +9,8 @@ import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 import org.springframework.test.annotation.Rollback;
 
+import java.util.Optional;
+
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(false)
@@ -40,6 +42,19 @@ class MywebappVso24ApplicationTests {
         for (User user : users){
             System.out.println(user);
         }
+    }
+
+    @Test
+    void testUpdate(){
+        Optional<User> optionalUser = repo.findById(5);
+        User user = optionalUser.get();
+        System.out.println(user);
+        user.setLastName("Mänd");
+        repo.save(user);
+
+        User updatedUser = repo.findById(5).get();
+        System.out.println(updatedUser);
+        Assertions.assertThat(updatedUser.getLastName()).isEqualTo("Mänd");
     }
 
 }

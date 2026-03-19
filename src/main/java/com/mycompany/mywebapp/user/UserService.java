@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -16,5 +17,15 @@ public class UserService {
 
     public void save(User user){
         repo.save(user);
+    }
+
+    public User get(Integer id) throws Exception{
+        Optional result = repo.findById(id);
+        System.out.println(result);
+        if(result.isPresent()){
+            User user = (User) result.get();
+            return user;
+        }
+        throw new Exception("Could not find user with ID " + id);
     }
 }
